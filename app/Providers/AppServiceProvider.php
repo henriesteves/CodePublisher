@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace CodePublisher\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
