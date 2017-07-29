@@ -15,7 +15,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
@@ -25,13 +25,15 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>
-                            Actions
+                            
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
 
             </table>
+
+            {{ $categories->links() }}
 
         </div>
     </div>

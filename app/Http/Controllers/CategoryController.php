@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function __contruct() {
+    private $category;
 
+    public function __construct(Category $category)
+    {
+
+        $this->category = $category;
     }
 
     /**
@@ -18,7 +22,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        //$categories = $this->category->all();
+        //$categories = $this->category->query()->paginate(15);
+        //$categories = $this->category->query()->simplePaginate(15);
+        $categories = $this->category->paginate(15);
 
         return view('category.index', compact('categories'));
     }
