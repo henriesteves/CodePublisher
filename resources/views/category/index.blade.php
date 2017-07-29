@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3>Listagem de Categorias</h3>
-            <a href="{{ route('category.create') }}" class="btn btn-primary">Nova Categoria</a>
+            <h3>Categories</h3>
+            <a href="{{ route('category.create') }}" class="btn btn-primary">New Category</a>
         </div>
         
         <div class="row">
