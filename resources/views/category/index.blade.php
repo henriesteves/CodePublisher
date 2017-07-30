@@ -25,7 +25,8 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>
-                            
+                            <a href="{{ route('category.edit', ['id' => $category->id]) }}">Edit</a> | 
+                            <a href="{{ route('category.confirm', ['id' => $category->id]) }}">Delete</a>
                         </td>
                     </tr>
                     @endforeach

@@ -11,7 +11,6 @@ class CategoryController extends Controller
 
     public function __construct(Category $category)
     {
-
         $this->category = $category;
     }
 
@@ -48,20 +47,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->category->create($request->all());
+        $this->category->create($request->only('name'));
 
         return redirect()->route('category.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -72,7 +60,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = $this->category->findOrFail($id);
+
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -84,7 +74,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = $this->category->findOrFail($id);
+        $data = $request->only('name');
+        $category->fill($data);
+        $category->save();
+
+        return redirect()->route('category.index');
+    }
+
+    public function confirm($id)
+    {
+        $category = $this->category->findOrFail($id);
+
+        return view('category.confirm', compact('category'));
     }
 
     /**
@@ -95,6 +97,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = $this->category->findOrFail($id);
+
+        $category->delete();
+
+        return redirect()->route('category.index');
     }
 }

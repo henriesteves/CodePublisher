@@ -20,5 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('category', 'CategoryController');
+    Route::resource('category', 'CategoryController', ['except' => 'show']);
+    Route::get('category/{category}/confirm', ['as' => 'category.confirm', 'uses' => 'CategoryController@confirm']);
 });

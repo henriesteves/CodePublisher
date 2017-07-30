@@ -7,10 +7,7 @@
 
             {!! Form::open(['route' => 'category.store', 'class' => 'form']) !!}
 
-            <div class="form-group">
-                {!! Form::label('name', 'Name') !!}
-                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-            </div>
+            @include('category._form')
 
             <div class="form-group">
                 {!! Form::submit('Add Category', ['class' => 'btn btn-primary']) !!}
