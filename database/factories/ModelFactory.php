@@ -30,3 +30,14 @@ $factory->define(CodePublisher\Category::class, function (Faker\Generator $faker
         'name' => ucfirst($faker->unique()->word)
     ];
 });
+
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(CodePublisher\Book::class, function (Faker\Generator $faker) {
+
+    return [
+        'title' => $faker->sentence,
+        'subtitle' => $faker->sentence,
+        'price' => $faker->randomNumber(2),
+    ];
+});
