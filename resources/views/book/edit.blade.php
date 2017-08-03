@@ -5,6 +5,16 @@
         <div class="row">
             <h3>Edit Book</h3>
 
+            {{--
+            @if($errors->any())
+                <ul class="alert alert-danger list-inline">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            --}}
+
             {!! Form::model($book, [
                 'route' => 
                     ['book.update', 'id' => $book->id], 

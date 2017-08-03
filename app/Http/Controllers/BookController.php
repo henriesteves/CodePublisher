@@ -3,6 +3,7 @@
 namespace CodePublisher\Http\Controllers;
 
 use CodePublisher\Book;
+use CodePublisher\Http\Requests\BookRequest;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -42,9 +43,15 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        $this->book->create($request->only('title', 'subtitle', 'price'));
+        $data = $request->only('user_id', 'title', 'subtitle', 'price');
+
+        $data['user_id'] = auth()->user()->id;
+
+        //dd($data);
+
+        $this->book->create($data);
 
         return redirect()->route('book.index');
     }
@@ -80,7 +87,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BookRequest $request, $id)
     {
         $book = $this->book->findOrFail($id);
         $data = $request->only('title', 'subtitle', 'price');

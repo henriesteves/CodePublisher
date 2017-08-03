@@ -36,6 +36,7 @@ $factory->define(CodePublisher\Category::class, function (Faker\Generator $faker
 $factory->define(CodePublisher\Book::class, function (Faker\Generator $faker) {
 
     return [
+        'user_id' => rand(1, 2),
         'title' => $faker->sentence,
         'subtitle' => $faker->sentence,
         'price' => $faker->randomNumber(2),
