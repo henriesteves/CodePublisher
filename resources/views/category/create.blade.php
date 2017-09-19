@@ -15,6 +15,8 @@
             @endif
             --}}
 
+            {!! Alert::success('ok') !!}
+
             {!! Form::open(['route' => 'category.store', 'class' => 'form']) !!}
 
             @include('category._form')
