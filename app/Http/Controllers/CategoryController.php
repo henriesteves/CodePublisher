@@ -54,7 +54,12 @@ class CategoryController extends Controller
 
         $this->category->create($request->only('name'));
 
-        return redirect()->route('category.index');
+        $url = $request->get('redirect_to', route('category.index'));
+
+        $request->session()->flash('message', 'The category was created');
+
+        //return redirect()->route('category.index');
+        return redirect()->to($url);
     }
 
     /**
@@ -84,7 +89,12 @@ class CategoryController extends Controller
         $category->fill($data);
         $category->save();
 
-        return redirect()->route('category.index');
+        $url = $request->get('redirect_to', route('category.index'));
+
+        $request->session()->flash('message', 'The category was updated');
+
+        //return redirect()->route('category.index');
+        return redirect()->to($url);
     }
 
     public function confirm($id)
@@ -97,15 +107,21 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $category = $this->category->findOrFail($id);
 
         $category->delete();
 
-        return redirect()->route('category.index');
+        $request->session()->flash('message', 'The category was deleted');
+
+        $url = $request->redirect_to;
+
+        //return redirect()->route('category.index');
+        return redirect()->to($url);
     }
 }

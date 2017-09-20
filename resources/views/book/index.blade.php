@@ -4,11 +4,17 @@
     <div class="container">
         <div class="row">
             <h3>Books</h3>
+
+            {{--
             <a href="{{ route('book.create') }}" class="btn btn-primary">New Book</a>
+            --}}
+
+            {!! Button::primary('New Book')->asLinkTo(route('book.create')) !!}
         </div>
         
         <div class="row">
 
+            {{--
             <table class="table table-striped">
 
                 <thead>
@@ -37,6 +43,17 @@
                 </tbody>
 
             </table>
+            --}}
+
+            {!!
+                Table::withContents($books->items())->striped()
+                ->callback('Actions', function($field, $book) {
+                    return (
+                        "<a href=\"" . route('book.edit', ['id' => $book->id]) . "\">Edit</a> |
+                        <a href=\"" . route('book.confirm', ['id' => $book->id]) . "\">Delete</a>"
+                        );
+                })
+            !!}
 
             {{ $books->links() }}
 

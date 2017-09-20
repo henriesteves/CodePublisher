@@ -12,13 +12,19 @@
                     'method' => 'PUT'
             ]) !!}
 
-            @include('category._form')
+                @include('category._form')
 
-            <div class="form-group">
-                {!! Form::submit('Save Category', ['class' => 'btn btn-primary']) !!}
-            </div>
+                {{-- 
+                <div class="form-group">
+                    {!! Form::submit('Save Category', ['class' => 'btn btn-primary']) !!}
+                </div>
+                --}}
+                {!! Html::openFormGroup() !!}
+                    {!! Button::primary('Save Category')->submit() !!}
+                {!! Html::closeFormGroup() !!}
 
             {!! Form::close() !!}
+
         </div>
     </div>
 @endsection

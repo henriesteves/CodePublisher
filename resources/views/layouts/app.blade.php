@@ -22,6 +22,8 @@
 </head>
 <body>
     <div id="app">
+
+        {{--
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -78,6 +80,59 @@
                 </div>
             </div>
         </nav>
+        --}}
+
+        <?php
+        $navbar = Navbar::withBrand(config('app.name', 'CodePublisher'), url('/'));
+
+        if(Auth::check()) {
+
+            $links = Navigation::links([
+                [
+                    'link' => route('category.index'),
+                    'title' => 'Categories'
+                ],
+                [
+                    'link' => route('book.index'),
+                    'title' => 'Books'
+                ]
+            ]);
+
+            $logout = Navigation::links([
+                [
+                    Auth::user()->name,
+                    [
+                        [
+                            'link' => url('/logout'),
+                            'title' => 'Logout',
+                            'linkAttributes' => [
+                                'onclick' => "event.preventDefault(); document.getElementById(\"logout-form\").submit()"
+                            ]
+                        ]
+                    ]
+                ]
+            ])->right();
+
+            $navbar
+                ->withContent($links)
+                ->withContent($logout);
+        }
+        ?>
+
+        {!! $navbar !!}
+
+        {!! Form::open([
+            'url' => url('/logout'),
+            'id' => 'logout-form',
+            'style' => 'display:none'
+        ]) !!}
+        {!! Form::close() !!}
+
+        @if(Session::has('message'))
+            <div class="container">
+                {!! Alert::success(Session::get('message'))->close() !!}
+            </div>
+        @endif
 
         @yield('content')
     </div>

@@ -9,9 +9,15 @@
 
             @include('book._form')
 
+            {{--
             <div class="form-group">
                 {!! Form::submit('Add Book', ['class' => 'btn btn-primary']) !!}
             </div>
+            --}}
+
+            {!! Html::openFormGroup() !!}
+                {!! Button::primary('Add Book')->submit() !!}
+            {!! Html::closeFormGroup() !!}
 
             {!! Form::close() !!}
         </div>

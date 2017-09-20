@@ -4,11 +4,16 @@
     <div class="container">
         <div class="row">
             <h3>Categories</h3>
+            
+            {{--
             <a href="{{ route('category.create') }}" class="btn btn-primary">New Category</a>
+            --}}
+            {!! Button::primary('New Category')->asLinkTo(route('category.create')) !!}
         </div>
         
         <div class="row">
 
+            {{--
             <table class="table table-striped">
 
                 <thead>
@@ -33,6 +38,17 @@
                 </tbody>
 
             </table>
+            --}}
+
+            {!!
+                Table::withContents($categories->items())->striped()
+                ->callback('Actions', function($field, $category) {
+                    return (
+                        "<a href=\"" . route('category.edit', ['id' => $category->id]) . "\">Edit</a> |
+                        <a href=\"" . route('category.confirm', ['id' => $category->id]) . "\">Delete</a>"
+                        );
+                })
+            !!}
 
             {{ $categories->links() }}
 

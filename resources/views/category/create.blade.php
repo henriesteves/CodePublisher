@@ -15,17 +15,21 @@
             @endif
             --}}
 
-            {!! Alert::success('ok') !!}
-
             {!! Form::open(['route' => 'category.store', 'class' => 'form']) !!}
 
-            @include('category._form')
+                @include('category._form')
 
-            <div class="form-group">
-                {!! Form::submit('Add Category', ['class' => 'btn btn-primary']) !!}
-            </div>
+                {{-- 
+                <div class="form-group">
+                    {!! Form::submit('Add Category', ['class' => 'btn btn-primary']) !!}
+                </div>
+                --}}
+                {!! Html::openFormGroup() !!}
+                    {!! Button::primary('Add Category')->submit() !!}
+                {!! Html::closeFormGroup() !!}
 
             {!! Form::close() !!}
+
         </div>
     </div>
 @endsection

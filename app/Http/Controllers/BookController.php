@@ -53,7 +53,12 @@ class BookController extends Controller
 
         $this->book->create($data);
 
-        return redirect()->route('book.index');
+        $url = $request->get('redirect_to', route('book.index'));
+
+        $request->session()->flash('message', 'The book was updated');
+
+        //return redirect()->route('book.index');
+        return redirect()->to($url);
     }
 
     /**
@@ -94,7 +99,12 @@ class BookController extends Controller
         $book->fill($data);
         $book->save();
 
-        return redirect()->route('book.index');
+        $url = $request->get('redirect_to', route('book.index'));
+
+        $request->session()->flash('message', 'The book was updated');
+
+        //return redirect()->route('book.index');
+        return redirect()->to($url);
     }
 
     public function confirm($id)
@@ -107,15 +117,21 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $book = $this->book->findOrFail($id);
 
         $book->delete();
 
-        return redirect()->route('book.index');
+        $request->session()->flash('message', 'The book was deleted');
+
+        $url = $request->redirect_to;
+
+        //return redirect()->route('book.index');
+        return redirect()->to($url);
     }
 }

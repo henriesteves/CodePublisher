@@ -24,11 +24,18 @@
 
             @include('book._form')
 
+            {{--
             <div class="form-group">
                 {!! Form::submit('Save Book', ['class' => 'btn btn-primary']) !!}
             </div>
+            --}}
+
+            {!! Html::openFormGroup() !!}
+                {!! Button::primary('Save Book')->submit() !!}
+            {!! Html::closeFormGroup() !!}
 
             {!! Form::close() !!}
+
         </div>
     </div>
 @endsection
